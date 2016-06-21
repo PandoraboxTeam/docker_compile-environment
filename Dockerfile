@@ -9,14 +9,20 @@ ENV \
   LIB_PATH=/work \
   WORK_PATH=/USER
 
-ADD https://raw.githubusercontent.com/PandoraboxTeam/Compile-Environment/master/ubuntu.sh /tmp/
-
+# Use chinese repo
 RUN \
-  sed -i "s/archive.ubuntu.com/cn.archive.ubuntu.com/g" /etc/apt/sources.list && \
-  bash /tmp/ubuntu.sh &&\
+  sed -i "s/archive.ubuntu.com/cn.archive.ubuntu.com/g" /etc/apt/sources.list
+
+# Run automated install script
+RUN \
+  apt-get update && \
+  apt-get install -y curl && \
+  curl -sL https://raw.githubusercontent.com/PandoraboxTeam/Compile-Environment/master/ubuntu.sh | bash
+
+# Clear cache
+RUN \
   apt-get clean && \
   apt-get autoclean & \
-  rm -rf /tmp/ubuntu.sh && \
   rm -rf /var/cache/apt/archives/partial
 
 RUN \
