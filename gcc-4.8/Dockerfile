@@ -20,9 +20,9 @@ ARG gid=1000
 
 # Run automated install script
 RUN \
-  apt-get update && \ 
+  apt-get update && \
   apt-get install -y curl && \
-  curl -sL https://raw.githubusercontent.com/PandoraboxTeam/Compile-Environment/master/ubuntu.sh | bash
+  curl -sL https://raw.githubusercontent.com/PandoraboxTeam/Compile-Environment/master/gcc-4.8/ubuntu.sh | bash
 
 # Clear cache
 RUN \
